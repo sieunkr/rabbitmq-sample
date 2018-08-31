@@ -26,4 +26,17 @@ message.publish(exchange,
 
 rabbitpy.exceptions.MessageReturnedException: Message was returned by RabbitMQ: (312) for exchange NO_ROUTE
 
+## 메시지 발행 정상 확인
 
+- publish_confirm_rabbitpy.py
+
+
+
+````python
+channel.enable_publisher_confirms()
+...
+if message.publish(exchange, 'example-routing-key'):
+    print('message OK')
+````
+
+비동기로 처리하지만 확인을 받는 시점을 정확히 알 수 없다. 또한 확인을 받을 때까지 블로킹되므로 느리다. 
